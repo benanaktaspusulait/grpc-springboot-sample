@@ -1,25 +1,27 @@
+syntax = "proto3";
+
 option java_multiple_files = true;
 package com.pusulait.grpc.lesson;
 
 message Classroom {
-  required string  name = 1;
-  required string lesson_code = 2;
+  string  name = 1;
+  string lesson_code = 2;
   repeated Student students = 3;
 }
 
 message Student {
-  required string  first_name = 1;
-  required string last_name = 2;
-  required int32 age = 3;
+  string  first_name = 1;
+  string last_name = 2;
+  int32 age = 3;
 }
 
 message RecordRequest{
-  required Student student = 1;
-  required Classroom classroom = 2;
+  Student student = 1;
+  Classroom classroom = 2;
 }
 
 message RecordResult {
-  required RecordResultEnum recordResultEnum = 1;
+  RecordResultEnum recordResultEnum = 1;
 }
 
 enum RecordResultEnum {
