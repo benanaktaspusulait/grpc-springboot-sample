@@ -1,9 +1,6 @@
 package com.pusulait.grpc;
 
-import com.pusulait.grpc.lesson.RecordResult;
-import com.pusulait.grpc.lesson.RecordResultEnum;
-import com.pusulait.grpc.lesson.RecordServiceGrpc;
-import com.pusulait.grpc.lesson.Student;
+import com.pusulait.grpc.lesson.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +23,21 @@ public class LessonClient {
         recordServiceBlockingStub = RecordServiceGrpc.newBlockingStub(managedChannel);
     }
 
+    public RecordResultEnum record2(Student student, Classroom classroom) {
+
+        log.info("client sending {}", student);
+
+        RecordRequest recordRequest = RecordRequest.newBuilder()
+                .setStudent(student)
+                .setClassroom(classroom)
+                .build();
+
+        RecordResult recordResult = recordServiceBlockingStub.record2(recordRequest);
+        log.info("client received {}", recordResult.getRecordResultEnum());
+
+        return recordResult.getRecordResultEnum();
+    }
+
     public RecordResultEnum record(String firstName, String lastName, Integer age) {
 
         Student student = Student.newBuilder()
@@ -41,5 +53,7 @@ public class LessonClient {
 
         return recordResult.getRecordResultEnum();
     }
+
+
 
 }

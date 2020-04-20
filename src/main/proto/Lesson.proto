@@ -1,11 +1,21 @@
-
 option java_multiple_files = true;
 package com.pusulait.grpc.lesson;
+
+message Classroom {
+  required string  name = 1;
+  required string lesson_code = 2;
+  repeated Student students = 3;
+}
 
 message Student {
   required string  first_name = 1;
   required string last_name = 2;
   required int32 age = 3;
+}
+
+message RecordRequest{
+  required Student student = 1;
+  required Classroom classroom = 2;
 }
 
 message RecordResult {
@@ -19,4 +29,6 @@ enum RecordResultEnum {
 
 service RecordService {
   rpc record (Student) returns (RecordResult);
+  rpc record2 (RecordRequest) returns (RecordResult);
+
 }
