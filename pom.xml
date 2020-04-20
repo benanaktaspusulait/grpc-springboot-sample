@@ -25,6 +25,8 @@
     <grpc-spring-boot-starter.version>3.0.0</grpc-spring-boot-starter.version>
     <os-maven-plugin.version>1.6.1</os-maven-plugin.version>
     <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
+    <protoc.version>3.7.1</protoc.version>
+
   </properties>
 
   <dependencies>
@@ -36,7 +38,19 @@
       <groupId>io.github.lognet</groupId>
       <artifactId>grpc-spring-boot-starter</artifactId>
       <version>${grpc-spring-boot-starter.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.google.protobuf</groupId>
+          <artifactId>protobuf-java</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
+      <version>${protoc.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
